@@ -23,7 +23,21 @@
  */
 function range(start, end) {
     // YOUR CODE GOES BELOW HERE //
+    var arr = []
+    var arr2 = []
+    if (start<end){
+        for (var i = start; i<end+1; i++)
+        arr.push(i);
+        return arr;
+    } else{
+        for (var i = start; i>end-1; i--){
+        arr2.push(i);
+        }
+        return arr2;
+    }
     
+    
+      
     
     
     

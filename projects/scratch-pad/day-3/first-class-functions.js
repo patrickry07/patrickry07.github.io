@@ -13,6 +13,16 @@
  */
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
+     if (typeof base === 'number'){
+     return function func1(value){
+         return value>base
+     }
+   
+   }else {
+    return function func2(value){
+        return value>base
+    }
+   } 
     
     
     
@@ -27,7 +37,17 @@ function createGreaterThanFilter(base) {
  */
 function createLessThanFilter(base) {
     // YOUR CODE BELOW HERE //
-    
+     if (typeof base === 'number'){
+     return function func1(value){
+         return value<base
+     }
+   
+   }else {
+    return function func2(value){
+        return value<base
+    }
+   } 
+        
     
     
     
@@ -41,8 +61,12 @@ function createLessThanFilter(base) {
  */
 function createStartsWithFilter(startsWith) {
     // YOUR CODE BELOW HERE //
-    
-    
+    // returning a function to test a string for a char
+     return function func3(string1){
+
+         return startsWith.toLowerCase()===string1[0].toLowerCase();
+         
+     }
     
     
     // YOUR CODE ABOVE HERE //
@@ -55,8 +79,9 @@ function createStartsWithFilter(startsWith) {
  */
 function createEndsWithFilter(endsWith) {
     // YOUR CODE BELOW HERE //
-    
-    
+         return function func3(string1){
+         return endsWith.toLowerCase()==string1[string1.length-1].toLowerCase();
+         }
     
     
     // YOUR CODE ABOVE HERE //
@@ -71,9 +96,11 @@ function createEndsWithFilter(endsWith) {
  */
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
-    
-    
-    
+    var arr = [];
+    for (var i = 0; i<strings.length; i++){
+        arr.push(modify(strings[i]));
+    }
+    return arr;
     
     // YOUR CODE ABOVE HERE //
 }
@@ -89,7 +116,16 @@ function modifyStrings(strings, modify) {
  */
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
-    
+    var arr = []
+    for (var i = 0; i<strings.length; i++){
+        arr.push(test(strings[i]));
+    }
+    for (var j = 0; j < arr.length; j++){
+        if (arr[j]===false){
+            return false;
+        }
+    }
+    return true;
     
     
     
