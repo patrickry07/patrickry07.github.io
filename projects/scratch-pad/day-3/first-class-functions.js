@@ -14,15 +14,15 @@
 function createGreaterThanFilter(base) {
     // YOUR CODE BELOW HERE //
      if (typeof base === 'number'){
-     return function func1(value){
-         return value>base
-     }
+        return function func1(value){
+            return value>base
+        }
    
-   }else {
-    return function func2(value){
-        return value>base
-    }
-   } 
+    }else {
+        return function func2(value){
+            return value>base
+        } 
+    } 
     
     
     
@@ -97,6 +97,7 @@ function createEndsWithFilter(endsWith) {
 function modifyStrings(strings, modify) {
     // YOUR CODE BELOW HERE //
     var arr = [];
+    // push the new modified strings into the arr array
     for (var i = 0; i<strings.length; i++){
         arr.push(modify(strings[i]));
     }
@@ -117,9 +118,11 @@ function modifyStrings(strings, modify) {
 function allStringsPass(strings, test) {
     // YOUR CODE BELOW HERE //
     var arr = []
+    // create a for loop that pulls the test function and applies it to the string arrays
     for (var i = 0; i<strings.length; i++){
         arr.push(test(strings[i]));
     }
+    // create a loop that goes through the newly created arr array and checks if any of the values are false
     for (var j = 0; j < arr.length; j++){
         if (arr[j]===false){
             return false;
