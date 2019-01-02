@@ -71,13 +71,19 @@ function makeContactList(length, addContact, findContact, removeContact) {
         removeContact: function(contact){
             return contacts.splice(contact, 1);
         },
+        
+//          * BONUS : add a printAllContactNames() Function to your makeContactList() factory, so that the 
+//  *         contact-list returned has an all() API. The printAllContactNames() Function should 
+//  *         return a String formated with all the full-names of the separated 
+//  *         with a line-break, like so:
+        
         printAllContactNames: function (){
-            for (var i = 0; i < contacts.length; i++){
-                 allContacts.push(contacts[i]["nameFirst"] + ' ' + contacts[i]["nameLast"]);
-            }
-            return 
-        }
-    }
+           let arr = [];
+            for (var i = 0; i <= contacts.length - 1; i++){
+                 arr.push(contacts[i].nameFirst + ' ' + contacts[i].nameLast);
+            }return arr.join('\n');
+        } 
+    } 
 }
 
 

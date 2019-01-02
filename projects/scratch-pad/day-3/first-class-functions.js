@@ -18,7 +18,7 @@ function createGreaterThanFilter(base) {
             return value>base
         }
    
-    }else {
+    }else {T
         return function func2(value){
             return value>base
         } 
