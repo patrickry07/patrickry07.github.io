@@ -64,7 +64,8 @@ var arrT = [];
         }arrT.push(arrk.join(''));
       }
     
-  } console.log(arrT.join('\n')); return arrT.join('\n'); 
+  } console.log(arrT.join('\n').concat('\n'));return arrT.concat("\n");
+  
 }
 
 ////////////////////////////////////////////////////////////////////////////////
