@@ -196,7 +196,8 @@ _.contains = function (array, value){
 *      -> should log "a" "b" "c" to the console
 */
 
-_.each = function (collection,fn){
+_.each = function (collection, fn){
+    var arr1 = [];
     if (Array.isArray(collection)){
         for (var i = 0; i < collection.length; i++){
             fn(collection[i], i, collection);
@@ -221,23 +222,18 @@ _.each = function (collection,fn){
 */
 
 _.unique = function (array){
-    var arr = [];
-    var arrDup = [];
-    for (var l = 0; l < array.length; l++){
-        arrDup.push(array[l])
+  var arr = [];
+  var arr2 = [];
+  for (var i = 0; i < array.length; i++){
+    arr.push(_.indexOf(array, array[i]));
+    
+  }
+  for (var j = 0; j < arr.length; j++){
+    if (arr[j] === j){
+      arr2.push(array[j]);
     }
-    for (var i = 0; i < arrDup.length; i++)
-        for (var j = 0; j < arrDup.length; j++){
-            if (arrDup[i] === arrDup[j] && i !== j){
-                delete arrDup[j];
-            }
-        }
-        for (var k = 0; k < arrDup.length; k++){
-            if (arrDup[k] !== undefined){
-                arr.push(arrDup[k]);
-            }
-        }
-        return arr
+  }
+return arr2;
 }
 
 /** _.filter
@@ -257,19 +253,11 @@ _.unique = function (array){
 */
 
 _.filter = function (array, fn){
-    var arr = [];
-    var arr2 = [];
-    for (var i = 0; i < array.length; i++){
-        arr.push(fn(array[i], i, array));
-    }
-    console.log(arr)
-    for (var j = 0; j < array.length; j++){
-        if (arr[j] === true){
-            
-            arr2.push(array[j]);console.log(arr2);
-        }
-    }
-    return arr2
+  var arr = [];
+  _.each(array, function(e,i,a){
+      if (fn(e,i,a)) arr.push(e);
+  });
+return arr;
 }
 
 /** _.reject
@@ -284,6 +272,26 @@ _.filter = function (array, fn){
 * Examples:
 *   _.reject([1,2,3,4,5], function(e){return e%2 === 0}) -> [1,3,5]
 */
+
+_.reject = function (array, fn){
+  var arr = array.slice();
+  var arr2 = [];
+  var rej = _.filter(array, fn);
+  for (var i = 0; i < rej.length; i++){
+    for (var j = 0; j < array.length; j++ ){
+      if (rej[i] === array[j]){
+        delete arr[j]
+      }
+    }
+  }    
+    for (var k = 0; k < arr.length; k++){
+      if(arr[k] !== undefined){
+        arr2.push(arr[k])
+      }
+    }
+  return arr2
+}
+
 
 
 /** _.partition
@@ -305,6 +313,10 @@ _.filter = function (array, fn){
 }
 */
 
+_.partition = function (array, fn){
+    return [_.filter(array,fn),_.reject(array,fn)];
+}
+
 
 /** _.map
 * Arguments:
@@ -322,6 +334,15 @@ _.filter = function (array, fn){
 *   _.map([1,2,3,4], function(e){return e * 2}) -> [2,4,6,8]
 */
 
+_.map = function (collection, fn){
+  var arr = [];
+  var arr2 = [];
+  _.each(collection, function(e,i,a){
+      arr.push(fn(e,i,a)); 
+      
+  });
+return arr;
+}
 
 /** _.pluck
 * Arguments:
@@ -333,6 +354,11 @@ _.filter = function (array, fn){
 * Examples:
 *   _.pluck([{a: "one"}, {a: "two"}], "a") -> ["one", "two"]
 */
+
+_.pluck = function (array, property){
+    return _.map(array,x => x[property]);
+}
+                        
 
 
 /** _.every
@@ -356,6 +382,27 @@ _.filter = function (array, fn){
 *   _.every([1,2,3], function(e){return e % 2 === 0}) -> false
 */
 
+_.every = function (collection, fn){
+    if (typeof fn === 'function'){
+        var map = _.map(collection,fn);
+        for (var i = 0; i < map.length; i++){
+            if (map[i] === false){
+                return false;
+            }
+        }
+        return true;
+    }else{
+        for (var j = 0; j < collection.length; j++){
+            if (collection[j] === true){
+                return true;
+            
+            }else if(collection[j] === false){
+                return false;
+            }
+        }
+    }
+}
+
 
 /** _.some
 * Arguments:
@@ -378,6 +425,28 @@ _.filter = function (array, fn){
 *   _.some([1,2,3], function(e){return e % 2 === 0}) -> true
 */
 
+_.some = function (collection, fn){
+    if (typeof fn === 'function'){
+        var map = _.map(collection,fn)
+        for (var i = 0; i < map.length; i++){
+            if (map[i] === true){
+                return true
+            }
+        }
+        return false
+    }else{
+        for (var j = 0; j < collection.length; j++){
+            if (collection[j] === true){
+                return true;
+            
+            }else if(collection[j] === false){
+                return false;
+            }
+        }
+    }
+    
+}
+
 
 /** _.reduce
 * Arguments:
@@ -399,6 +468,34 @@ _.filter = function (array, fn){
 */
 
 
+// *   1) Call <function> for every element in <collection> passing the arguments:
+// *         previous result, element, index
+// *   2) Use the return value of <function> as the "previous result"
+// *      for the next iteration
+// *   3) On the very first iteration, use <seed> as the "previous result"
+// *   4) If no <seed> was given, use the first element/value of <collection> as <seed> and continue to the next element
+// *   5) After the last iteration, return the return value of the final <function> call
+_.reduce = function (array, fn, seed){
+    var sum;
+    if (seed === undefined || seed === 'null'){
+        sum = array[0]; console.log(array[0])
+        for(var j = 1; j < array.length; j++){
+            sum = fn(sum, array[j], j);
+            console.log(sum)
+        }
+    }else{
+        for (var i = 0; i < array.length; i++){
+            if (i === 0){
+                sum = fn(seed, array[i], i);
+            }else{
+                sum = fn(sum, array[i], i);
+            }
+        }
+    }
+    return sum;
+}
+
+
 /** _.extend
 * Arguments:
 *   1) An Object
@@ -413,6 +510,15 @@ _.filter = function (array, fn){
 *   _.extend(data, {b:"two"}); -> data now equals {a:"one",b:"two"}
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
+
+_.extend = function (obj1,...args){
+    for (var i = 0;i < arguments.length; i++){
+            for (var key in arguments[i+1]){
+                obj1[key] = arguments[i+1][key];
+            }
+    }
+    return obj1;
+} 
 
 //////////////////////////////////////////////////////////////////////
 // DON'T REMOVE THIS CODE ////////////////////////////////////////////
