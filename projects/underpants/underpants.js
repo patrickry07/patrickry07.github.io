@@ -511,7 +511,7 @@ _.reduce = function (array, fn, seed){
 *   _.extend(data, {a:"two"}); -> data now equals {a:"two"}
 */
 
-_.extend = function (obj1,...args){
+_.extend = function (obj1){
     for (var i = 0;i < arguments.length; i++){
             for (var key in arguments[i+1]){
                 obj1[key] = arguments[i+1][key];
