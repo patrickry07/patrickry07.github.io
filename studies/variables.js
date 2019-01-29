@@ -47,3 +47,25 @@ console.log(myName); // prints => bob
 var myVariable = 1;
 var myVariable = true;
 myVariable = "someString";
+
+
+//Differences between LET/CONST/VAR
+// Const and let are block scoped which means that they are contained within if statements and for/while loops as well as a function. 
+// This differs from var whose scope is contained within function, but can be accessed outside of the if-else statements and both loops.
+function test(){
+console.log(pat); // would console log (undefined)
+var pat = 'patrick';
+} 
+//calling this function would not result in an error as var declarations get hoisted
+
+
+
+function test(){
+console.log(pat); // ReferenceError: pat is not defined
+let pat = 'patrick'
+}
+
+function test(){
+console.log(pat); // ReferenceError: pat is not defined
+const pat = 'patrick';
+}

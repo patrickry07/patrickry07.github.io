@@ -78,6 +78,15 @@ console.log(Infinity / 10, Infinity * 10, Infinity +100); // console logs Infini
 // Primitive values are passed to a function BY COPY, complex values are BY REFERENCE. What does that mean, and how are they different?
     // When you assign a variable, it is a reference to an object but not the object itself. When you copy an object b = a both variables will point to the same address.
     // ^^This is refered to as copy by value
+var value = 10;
+var passed = value;
+value = 20
+// In this above example passed = 10 and value = 20, due to copying by value. the passed variable still points to 10 even though we changed value to 20 after this copy by value
     
     //For objects, the values are the memory addresses of those objects.
     // ^This is referred to as copy by reference
+
+var ref = [1,2,3,4,5];
+var fer = ref;
+ref[0] = 100;
+// In the above example, both ref and fer are now equal to [100,2,3,4,5] because both of the variables point to the same reference, so changing one changes the other. 

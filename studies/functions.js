@@ -9,11 +9,18 @@ function func(a,b,c){
     return a + b + c;
 }
 // How do we assign a function to a variable?
-var funcVar = func(1,2,3)
+var funcVar = function(a,b){
+    return a + b;
+};
 // Functions can OPTIONALLY take inputs, and OPTIONALLY return a single value. How do we specify inputs, and how do we specify outputs?
 function func2(d,e,f){
     return d + e + f;
 } // here the return will return a single value based off the arguments which are passed through the inputs/parameters
+// Both parameters and return statements are optional
+    // Parameters are optional because a body function does not have to utilize dynamic variables. If you just want to the function to perform one task with defined numbers, 
+    // you can set the function to do just that without passing any parameters,arguments. 
+    // The return statement is optional because a function can still be useful/used without one. One example is to push values into a variable outside its scope. Or to change variable to another outside its scope.
+    // One example would be the forEach HOF, where commonly the forEach loop is run and then pushes its values into an array outside of the loop. 
 
 // Scope: Functions can see and modify variables in parent or global scopes. The inverse is NOT true.
 var globalScope = 1;

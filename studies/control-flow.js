@@ -45,8 +45,11 @@ var arr = []
   console.log(arr) // The above program will console log [ 1,2,'Fizz',4,'Buzz','Fizz',7,8,'Fizz','Buzz',11,'Fizz',13,14,'Buzz',16,17,'Fizz',19,'Buzz' ]
 //   The error when count = 15 is due to the fact that the Buzz part of the code for 15 is ran because it meets the criteria for it, therefore never getting to the Fizzbuzz part of the code
 
-  
+// else-if is important in these instances, because it tells the interpreter to still want to do something else if the initial 'if condition' is false.
+//We can chain as many else-if statements as we want to hit additional cases within our program. If none of these cases are hit, the else statement gets run
 
+// Also, the 'else' is useful in if/else if statements as a 'catch all.' 
+// By that I mean that if none of the if or else-if statements are truthy, then the else statement will be run and the code for the catch all will be run.
 
 // Switch
         //switch statements are useful when there is very discrete or limited options for variables. The most important way to control flow within a switch statement is to 
